@@ -1,6 +1,8 @@
 from camera import Camera
 from streamingoutput import StreamingOutput
+from servo import Servo
 from threading import Thread
+import json
 import websocket
 
 # Server host
@@ -13,11 +15,16 @@ frame_size = (640, 480)
 frame_rate = 20
 # Streaming output object
 output = StreamingOutput()
+# Servos
+servoX = Servo(channel=0)
+servoY = Servo(channel=1)
 
 
 def on_message(wsapp, message):
-    print('message')
     print (message)
+    message = json.dumps(message)
+    if message['op'] == 'mv':
+        print ('move')
 
 try:
     # Start camera
@@ -37,7 +44,6 @@ try:
     # Websocket: Used for sending frames to server
     ws = websocket.WebSocket()
     ws.connect(f"ws://{serverHost}/ws/frame/device1/")
-
     while True:
         with output.condition:
             output.condition.wait()
