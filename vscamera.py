@@ -22,7 +22,7 @@ servoY = Servo(channel=1)
 
 def on_message(wsapp, message):
     print (type(message))
-    message = json.dumps(message)
+    message = json.loads(message)
     print (type(message))
     if message['op'] == 'mv':
         print ('move')
