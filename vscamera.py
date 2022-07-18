@@ -32,10 +32,10 @@ def on_message(wsapp, message):
         elif dir == 'R':
             print ('RIGHT')
             Thread(target = servoX.start_move(distance = -(message['dist']))).start()
-        elif dir == 'U':
+        elif dir == 'D':
             print ('RIGHT')
             Thread(target = servoY.start_move(distance = +(message['dist']))).start()
-        elif dir == 'D':
+        elif dir == 'U':
             print ('RIGHT')
             Thread(target = servoY.start_move(distance = -(message['dist']))).start()
 
