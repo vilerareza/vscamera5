@@ -25,7 +25,11 @@ def on_message(wsapp, message):
     message = json.loads(message)
     print (type(message))
     if message['op'] == 'mv':
-        print ('move')
+        dir = message['dir']
+        if dir == 'L':
+            Thread(target = servoX.start_move(distance = -(message['distance']))).start()
+        elif dir == 'R':
+            Thread(target = servoX.start_move(distance = +(message['distance']))).start()
 
 try:
     # Start camera
