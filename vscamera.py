@@ -28,10 +28,10 @@ def on_message(wsapp, message):
         dir = message['dir']
         if dir == 'L':
             print ('LEFT')
-            Thread(target = servoX.start_move(distance = -(message['distance']))).start()
+            Thread(target = servoX.start_move(distance = -(message['dist']))).start()
         elif dir == 'R':
             print ('RIGHT')
-            Thread(target = servoX.start_move(distance = +(message['distance']))).start()
+            Thread(target = servoX.start_move(distance = +(message['dist']))).start()
 
 try:
     # Start camera
