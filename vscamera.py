@@ -21,22 +21,16 @@ servoY = Servo(channel=1)
 
 
 def on_message(wsapp, message):
-    print (type(message))
     message = json.loads(message)
-    print (type(message))
     if message['op'] == 'mv':
         dir = message['dir']
         if dir == 'L':
-            print ('LEFT')
             Thread(target = servoX.start_move(distance = +(message['dist']))).start()
         elif dir == 'R':
-            print ('RIGHT')
             Thread(target = servoX.start_move(distance = -(message['dist']))).start()
         elif dir == 'D':
-            print ('RIGHT')
             Thread(target = servoY.start_move(distance = +(message['dist']))).start()
         elif dir == 'U':
-            print ('RIGHT')
             Thread(target = servoY.start_move(distance = -(message['dist']))).start()
 
 try:
