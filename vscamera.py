@@ -35,6 +35,7 @@ def on_message(wsapp, message):
         elif dir == 'U':
             Thread(target = servoY.start_move(distance = -(message['dist']))).start()
     if message['op'] == 'lt':
+        print (message)
         on = message['on']
         if on == True:
             Thread(target = light.led_on).start()
