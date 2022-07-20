@@ -20,7 +20,7 @@ output = StreamingOutput()
 servoX = Servo(channel=0)
 servoY = Servo(channel=1)
 # Light
-light = Light(pin = 11)
+light = Light(pin = 17)
 
 def on_message(wsapp, message):
     message = json.loads(message)

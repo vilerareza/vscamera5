@@ -7,8 +7,8 @@ class Light():
         self.led_init()
 
     def led_init(self):
+        # GPIO is in BCM mode
         #GPIO.setmode(GPIO.BOARD)
-        print (GPIO.getmode())
         GPIO.setup(self.ledPin, GPIO.OUT)
 
     def led_on(self):
