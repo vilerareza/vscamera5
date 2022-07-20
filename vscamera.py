@@ -1,6 +1,7 @@
 from camera import Camera
 from streamingoutput import StreamingOutput
 from servo import Servo
+from light import Light
 from threading import Thread
 import json
 import websocket
@@ -18,7 +19,8 @@ output = StreamingOutput()
 # Servos
 servoX = Servo(channel=0)
 servoY = Servo(channel=1)
-
+# Light
+light = Light(pin = 11)
 
 def on_message(wsapp, message):
     message = json.loads(message)
@@ -32,6 +34,12 @@ def on_message(wsapp, message):
             Thread(target = servoY.start_move(distance = +(message['dist']))).start()
         elif dir == 'U':
             Thread(target = servoY.start_move(distance = -(message['dist']))).start()
+    if message['op'] == 'li':
+        on = message['on']
+        if on == True:
+            Thread(target = light.led_on).start()
+        else:
+            Thread(target = light.led_off).start()
 
 try:
     # Start camera
