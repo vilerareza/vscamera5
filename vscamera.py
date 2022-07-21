@@ -41,8 +41,8 @@ def on_message(wsapp, message):
             Thread(target = servoY.start_move(distance = -(message['dist']))).start()
         elif dir == 'C':
             # Centering
-            Thread(target = servoX.center()).start()
-            Thread(target = servoY.center()).start()
+            Thread(target = servoX.center).start()
+            Thread(target = servoY.center).start()
             
     elif message['op'] == 'lt':
         # Light
