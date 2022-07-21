@@ -25,16 +25,27 @@ light = Light(pin = 17)
 def on_message(wsapp, message):
     message = json.loads(message)
     if message['op'] == 'mv':
+        # Movement
         dir = message['dir']
         if dir == 'L':
+            # Left
             Thread(target = servoX.start_move(distance = +(message['dist']))).start()
         elif dir == 'R':
+            # Right
             Thread(target = servoX.start_move(distance = -(message['dist']))).start()
         elif dir == 'D':
+            # Down
             Thread(target = servoY.start_move(distance = +(message['dist']))).start()
         elif dir == 'U':
+            # Up
             Thread(target = servoY.start_move(distance = -(message['dist']))).start()
+        elif dir == 'C':
+            # Centering
+            Thread(target = servoX.center()).start()
+            Thread(target = servoY.center()).start()
+            
     elif message['op'] == 'lt':
+        # Light
         on = message['on']
         if on == True:
             Thread(target = light.led_on).start()

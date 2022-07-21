@@ -15,14 +15,17 @@ class Servo():
         self.kit = ServoKit(channels = 16)
         self.channel = channel
         self.condition = Condition()
+        self.initialMove = True
         self.center()
         time.sleep(0.3)
         print ('servo init ok')
 
     def center(self, center_position = 90):
-        self.kit.servo[self.channel].angle = center_position
-        print(self.kit.servo[self.channel].angle)
-        self.start_move(pos = center_position)
+        if self.initialMove:
+            self.kit.servo[self.channel].angle = center_position
+            self.initialMove = False
+        else:
+            self.start_move(pos = center_position)
 
     def start_move(self, distance = 0, pos=None):
         #def move(distance, pos):
