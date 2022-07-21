@@ -1,3 +1,4 @@
+from functools import partial
 from camera import Camera
 from streamingoutput import StreamingOutput
 from servo import Servo
@@ -29,16 +30,16 @@ def on_message(wsapp, message):
         dir = message['dir']
         if dir == 'L':
             # Left
-            Thread(target = servoX.start_move(distance = +(message['dist']))).start()
+            Thread(target = partial(servoX.start_move, distance = +(message['dist']))).start()
         elif dir == 'R':
             # Right
-            Thread(target = servoX.start_move(distance = -(message['dist']))).start()
+            Thread(target = partial(servoX.start_move, distance = -(message['dist']))).start()
         elif dir == 'D':
             # Down
-            Thread(target = servoY.start_move(distance = +(message['dist']))).start()
+            Thread(target = partial(servoY.start_move, distance = +(message['dist']))).start()
         elif dir == 'U':
             # Up
-            Thread(target = servoY.start_move(distance = -(message['dist']))).start()
+            Thread(target = partial(servoY.start_move, distance = -(message['dist']))).start()
         elif dir == 'C':
             # Centering
             Thread(target = servoX.center).start()
