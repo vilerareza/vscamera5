@@ -8,7 +8,7 @@ import json
 import websocket
 
 # Server host
-serverHost = "192.168.67.102:8000"
+serverHost = "192.168.65.102:8000"
 # Camera object
 camera = Camera()
 # Frame size
