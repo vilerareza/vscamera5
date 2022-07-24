@@ -1,28 +1,18 @@
+'''
+Lights RGB LED. This module must be run using subprocess with RGB color value list as argument
+'''
 import board
 import neopixel
-import time
+import argparse
+import json
 
-class RGBLed():
-
-    pin = board.D10
-
-    def __init__(self) -> None:
-        self.color = neopixel.NeoPixel(self.pin, 1, brightness = 0.1, auto_write = False, pixel_order = neopixel.RGB)
-        #self.set_brightness()
-        self.set_color((0, 0, 0, 0))
-
-    def set_brightness(self, brightness = 0.1):
-        self.color.brightness = brightness
-
-    def set_color(self, color = (0, 0, 0, 0)):
-        self.color[0] = color
-
-status_led = RGBLed()
-status_led.set_color((255,0,0))
-status_led.color.show()
-time.sleep(5)
-status_led.color.fill((0,0,0))
-status_led.color.show()
-time.sleep(5)
-status_led.set_color((0,255,0))
-status_led.color.show()
+# Argument parsing
+parser = argparse.ArgumentParser()
+parser.add_argument('colorVal', type = str)
+args = parser.parse_args()
+colorVal = args.colorVal
+colorVal = json.loads(colorVal)
+# Light the rgb led
+pixels = neopixel.NeoPixel(board.D10, 1, brightness = 0.1, auto_write = False)
+pixels[0] = colorVal
+pixels.show()
