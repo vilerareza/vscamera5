@@ -55,7 +55,7 @@ def on_message(wsapp, message):
             Thread(target = light.led_off).start()
 
 try:
-    Thread(target = subprocess.run(['python','rgbled.py','[0,255,0]'])).start()
+    Thread(target = partial(subprocess.run, ['python','rgbled.py','[0,255,0]'])).start()
     # Start camera
     camera.start_camera(output, frame_size = frame_size, frame_rate = frame_rate)
     
@@ -73,7 +73,7 @@ try:
     # Websocket: Used for sending frames to server
     ws = websocket.WebSocket()
     ws.connect(f"ws://{serverHost}/ws/frame/device1/")
-    Thread(target = subprocess.run(['python','rgbled.py','[0,0,255]'])).start()
+    Thread(target = partial(subprocess.run, ['python','rgbled.py','[0,0,255]'])).start()
     while True:
         with output.condition:
             output.condition.wait()
@@ -81,5 +81,5 @@ try:
             ws.send(frame, opcode=2)
 
 except Exception as e:
-    Thread(target = subprocess.run(['python','rgbled.py','[255,0,0]'])).start()
+    Thread(target = partial(subprocess.run, ['python','rgbled.py','[255,0,0]'])).start()
     print (f'{e}: Camera Starting Error')

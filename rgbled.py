@@ -16,3 +16,4 @@ colorVal = json.loads(colorVal)
 pixels = neopixel.NeoPixel(board.D10, 1, brightness = 0.1, auto_write = False)
 pixels[0] = colorVal
 pixels.show()
+
