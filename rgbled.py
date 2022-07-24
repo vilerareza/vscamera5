@@ -20,4 +20,4 @@ class RGBLed():
 status_led = RGBLed()
 status_led.set_color((0,255,0))
 time.sleep(10)
-status_led.set_color((0,0,0))
+status_led.set_color()
