@@ -13,4 +13,4 @@ class RGBLed():
         self.color[0] = color
 
 status_led = RGBLed()
-status_led.set_colot(0,255,0)
+status_led.set_color(0,255,0)
