@@ -4,7 +4,7 @@ import neopixel
 class RGBLed():
 
     def __init__(self, pin = "D10") -> None:
-        self.color = neopixel.NeoPixel(f'board.{pin}', 1)
+        self.color = neopixel.NeoPixel(board.pin, 1)
         self.set_color(0, 0, 0)
 
     def set_color(self, color = (0, 0, 0)):
