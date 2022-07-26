@@ -74,7 +74,7 @@ try:
     # Websocket: Used for sending frames to server
     ws = websocket.WebSocket()
     ws.connect(f"ws://{serverHost}/ws/frame/device1/")
-    # Update the status LE to blue: Connected to server
+    # Update the status LED to blue: Connected to server
     Thread(target = partial(subprocess.run, ['python','rgbled.py','[10,10,35]'])).start()
     while True:
         with output.condition:
@@ -83,5 +83,10 @@ try:
             ws.send(frame, opcode=2)
 
 except Exception as e:
+    # Update the status LED to red: Exception occur
     Thread(target = partial(subprocess.run, ['python','rgbled.py','[25,0,0]'])).start()
     print (f'{e}: Camera Starting Error')
+
+finally:
+    # Update the status LED to red: End
+    Thread(target = partial(subprocess.run, ['python','rgbled.py','[25,0,0]'])).start()
