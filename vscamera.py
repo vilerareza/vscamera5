@@ -9,7 +9,7 @@ import websocket
 import subprocess
 
 # Server host
-serverHost = "192.168.65.246:8000"
+serverHost = "192.168.65.102:8000"
 # Camera object
 camera = Camera()
 # Frame size
